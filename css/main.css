@@ -1,0 +1,22 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  width: 600px;
+  background-color: grey;
+  justify-content: center;
+}
+
+
+.grid div{
+  height: 55px;
+  width: 55px;
+  border: black;
+  border-width: 1px;
+  border-style: dashed;
+}
+
+div.bomb:hover, div.safe:hover {
+  background-color: white;
+
+}
