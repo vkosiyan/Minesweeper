@@ -7,9 +7,11 @@ let blankName = 'safe' // class name for a blank square
 let bombText = '💣'; // what the innerText of a bomb square will say
 let blankTile = ''; // what the innerText of a blank square will say
 let boardDivs = [];
+let isGameOver = false;
 const boardTiles = []; 
 const numOfBombs = 10; // number of bombs in the game
 const numOfBlanks = tileNum - numOfBombs; //number of blank squares in the game
+
 // we want access to the images
 // and we want to know what beats whats
 // so maybe a "beats property somewhere"
@@ -122,6 +124,7 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
      function click(tile){
         console.log(tile)
         let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
+        if(isGameOver)return;
         if (tile.classList.contains('safeclicked')) return;
         tile.classList.add('safeclicked') // to change the color of the square and show it's clicked
         let bombClick = document.getElementsByClassName('bomb');
@@ -133,6 +136,8 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
                 bombClick[i].classList.add('bombclicked');
                 // bombClick[i].className = 'bombclicked';
                   }
+            window.alert("Game Over");
+            isGameOver = true;      
          } else if(tile.classList.contains('safe') && tile.data === 'empty') //if an empty tile is clicked
              { const isLeftSide = tile.id % width === 0; //defines which div numbers are on the left side of the grid
                 const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
@@ -173,23 +178,23 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
                     }
 
 
-                    if(tile.id < width * width - width - 1 && !isRightSide && tile.id > width - 1){ // we are checking all the tiles the top right of the clicked tile 
-                        let topRightIdNum = clickedId - width + 1;
-                        let topRightSquare = document.getElementById(topRightIdNum);
-                        click(topRightSquare);
-                    }
+                    // if(tile.id < width * width - width - 1 && !isRightSide && tile.id > width - 1){ // we are checking all the tiles the top right of the clicked tile 
+                    //     let topRightIdNum = clickedId - width + 1;
+                    //     let topRightSquare = document.getElementById(topRightIdNum);
+                    //     click(topRightSquare);
+                    // }
 
-                    if(tile.id > 0 && !isLeftSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom left **GOOD**
-                        let bottomLeftIdNum = clickedId + width -1;
-                        let bottomLeftSquare = document.getElementById(bottomLeftIdNum);
-                        click(bottomLeftSquare); 
-                    }
+                    // if(tile.id > 0 && !isLeftSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom left **GOOD**
+                    //     let bottomLeftIdNum = clickedId + width -1;
+                    //     let bottomLeftSquare = document.getElementById(bottomLeftIdNum);
+                    //     click(bottomLeftSquare); 
+                    // }
 
-                    if(tile.id > width - 1 && !isRightSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom right **GOOD**
-                        let bottomRightIdNum = clickedId + width + 1;
-                        let bottomRightSquare = document.getElementById(bottomRightIdNum);
-                       click(bottomRightSquare);
-                    }
+                    // if(tile.id > width - 1 && !isRightSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom right **GOOD**
+                    //     let bottomRightIdNum = clickedId + width + 1;
+                    //     let bottomRightSquare = document.getElementById(bottomRightIdNum);
+                    //    click(bottomRightSquare);
+                    // }
                                     
 
          } else if(tile.data > 0){ // we are only clicking the one tile if it contains a number
