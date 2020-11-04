@@ -120,10 +120,12 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
 
 
      function click(tile){
-        // console.log(tile)
+        console.log(tile)
         let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
+        if (tile.classList.contains('safeclicked')) return;
         tile.classList.add('safeclicked') // to change the color of the square and show it's clicked
         let bombClick = document.getElementsByClassName('bomb');
+
          if(tile.classList.contains('bomb')){ // if a bomb tile is clicked
 
             for (i = 0; i < bombClick.length; i++){
@@ -135,37 +137,60 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
              { const isLeftSide = tile.id % width === 0; //defines which div numbers are on the left side of the grid
                 const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
 
-                    // if(tile.id > 0 && !isLeftSide) { // we are checking all the tiles to the left of the clicked tile
-                    //     // console.log(typeof clickedId)
-                    //     let leftIdNum = clickedId - 1;
-                    //     // console.log(typeof leftIdNum)
-                    //     let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
-                    //     click(leftSquare); //we are clicking on the square to the left
-                    // }
+                    if(tile.id > 0 && !isLeftSide) { // we are checking all the tiles to the left of the clicked tile
+                        // console.log(typeof clickedId)
+                        let leftIdNum = clickedId - 1;
+                        // console.log(typeof leftIdNum)
+                        let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
+                        click(leftSquare); //we are clicking on the square to the left
+                        
+                    }
                     
-                    // if(tile.id > 0 && !isRightSide) { // we are checking all the tiles to the right of the clicked tile
-                    //     let rightIdNum = clickedId + 1;
-                    //     let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
-                    //     // console.log(clickedId)
-                    //     // console.log(rightIdNum)
-                    //     click(rightSquare); //we are clicking on the square to the right
-                    // }
+                    if(tile.id > 0 && !isRightSide) { // we are checking all the tiles to the right of the clicked tile
+                        let rightIdNum = clickedId + 1;
+                        let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
+                        // console.log(clickedId)
+                        // console.log(rightIdNum)
+                        click(rightSquare); //we are clicking on the square to the right
+                    }
                     
-                    if(tile.id > width - 1){ // we are checking all the tiles above the clicked tile
+                    if(tile.id > width){ // we are checking all the tiles above the clicked tile
                         let aboveIdNum = clickedId - width;
                         let aboveSquare = document.getElementById(aboveIdNum); //we are grabbing the square right above the current clicked
                         click(aboveSquare);
                     }
 
-                    if(tile.id < width * width - width){ // we are checking all the tiles above the clicked tile
+                    if(tile.id > width && !isLeftSide && tile.id > width + 1){ // we are checking all the tiles the top left of the clicked tile
+                        let topLeftIdNum = clickedId - width - 1;
+                        let topLeftSquare = document.getElementById(topLeftIdNum);
+                        click(topLeftSquare);
+                    }       
+
+                    if(tile.id < width * width - width){ // we are checking all the tiles below the clicked tile  **GOOD**
                         let belowIdNum = clickedId + width;
                         let belowSquare = document.getElementById(belowIdNum); //we are grabbing the square right above the current clicked
                         click(belowSquare);
                     }
 
-                    
-         
-           
+
+                    if(tile.id < width * width - width - 1 && !isRightSide && tile.id > width - 1){ // we are checking all the tiles the top right of the clicked tile 
+                        let topRightIdNum = clickedId - width + 1;
+                        let topRightSquare = document.getElementById(topRightIdNum);
+                        click(topRightSquare);
+                    }
+
+                    if(tile.id > 0 && !isLeftSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom left **GOOD**
+                        let bottomLeftIdNum = clickedId + width -1;
+                        let bottomLeftSquare = document.getElementById(bottomLeftIdNum);
+                        click(bottomLeftSquare); 
+                    }
+
+                    if(tile.id > width - 1 && !isRightSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom right **GOOD**
+                        let bottomRightIdNum = clickedId + width + 1;
+                        let bottomRightSquare = document.getElementById(bottomRightIdNum);
+                       click(bottomRightSquare);
+                    }
+                                    
 
          } else if(tile.data > 0){ // we are only clicking the one tile if it contains a number
             tile.innerText = tile.data;
