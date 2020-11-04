@@ -29,7 +29,7 @@ function createBoard() {
     boardDivs.push(tile);
 
     tile.addEventListener('click', function(e) {
-        firstClick(tile)
+        click(tile)
       })
     }
 
@@ -41,7 +41,9 @@ function createBoard() {
     boardArray.push(...bombArray);
     boardArray.push(...blankArray);
 
- 
+
+  
+    
 
     function shuffle(){ // we are randomizing the order of the bombs and blank areas
         const shuffled = boardArray.sort(() => Math.random() - 0.5);
@@ -49,8 +51,43 @@ function createBoard() {
         }
    
     shuffle();
+    console.log(boardTiles)
+    for (i = 0; i < boardTiles.length; i++){ // we are adding class names to each div with a number as an id so each square is labeled as either bomb or safe
+
+        let gridBlocks = document.getElementById([i]);
+        gridBlocks.className = boardTiles[i];
+
+        
+        //gridBlocks.innerText = boardTiles[i];
+    }
+
+    // add numbers to squares
+    for (let i = 0; i < boardTiles.length; i++){
+    let bombTotal = 0;    
+    const isLeftSide = i % width === 0; //defines which div numbers are on the left side of the grid
+    const isRightSide = i % width === width - 1; //defines which div numbers are on the right side of the grid
+
+        if (boardDivs[i].classList.contains('safe')) {
+            if(i > 0 && !isLeftSide && boardDivs[i - 1].classList.contains('bomb')) bombTotal++ // checks left of square
+            if(i > 0 && !isRightSide && boardDivs[i + 1].classList.contains('bomb')) bombTotal++ // checks right of square
+            if(i > width - 1 && !isLeftSide && boardDivs[i - width - 1].classList.contains('bomb')) bombTotal++ //checks top left of square
+            if(i > width - 1 && boardDivs[i - width].classList.contains('bomb')) bombTotal++ // checks above square
+            if(i > width - 1 && !isRightSide && boardDivs[i - width + 1].classList.contains('bomb')) bombTotal++ //checks top right of square
+            if(i < width * width - width && !isLeftSide && boardDivs[i + width - 1].classList.contains('bomb')) bombTotal++//checks bottom left square
+            if(i < width * width - width && boardDivs[i + width].classList.contains('bomb')) bombTotal++ //checks below square
+            if(i < width * width - width && !isRightSide && boardDivs[i + width + 1].classList.contains('bomb')) bombTotal++ //checks bottom right square
+            boardDivs[i].data = bombTotal;
+            if(bombTotal == 0){
+            boardDivs[i].data = 'empty';
+            }
+        } else {
+            boardDivs[i].data = 'bomb';
+            boardDivs[i].classList.add('highlight');
+        }
 
     
+
+    }
 }// last bracket of createBoard
 createBoard();
 //====================================================================
@@ -67,44 +104,26 @@ createBoard();
 // event listeners ================================================================
 
 
- //cannot be a bomb, so will be a number or empty space
-function firstClick(tile){
-    let clickedId = parseInt(tile.id); 
-    console.log(clickedId)
-for (i = tile.id; i < boardTiles.length; i++){ // we are adding class names to each div with a number as an id so each square is labeled as either bomb or safe
+let firstClick; //cannot be a bomb, so will be a number or empty space
 
-    let gridBlocks = document.getElementById([i]);
-    gridBlocks.className = boardTiles[i];
-}
-// add numbers to squares
-// for (let i = 0; i < boardTiles.length; i++){
-// let bombTotal = 0;    
-// const isLeftSide = i % width === 0; //defines which div numbers are on the left side of the grid
-// const isRightSide = i % width === width - 1; //defines which div numbers are on the right side of the grid
+// [...document.querySelectorAll('.bomb')].forEach(function(bombDiv) { // when you click one bomb, all other bombs appear
+//     bombDiv.addEventListener('click', function() {
+//         // firstBomb.innerText = '💣';
+//         // firstBomb.className = 'clickedbomb';  
+//         let bombClick = document.getElementsByClassName('bomb');
+//         console.log(bombClick)
+//         for (i = 0; i < bombClick.length; i++){
+//         bombClick[i].innerText = '💣'; 
+//         // bombClick[i].className = 'bombclicked';
+//           }
 
-//     if (boardDivs[i].classList.contains('safe')) {
-//         if(i > 0 && !isLeftSide && boardDivs[i - 1].classList.contains('bomb')) bombTotal++ // checks left of square
-//         if(i > 0 && !isRightSide && boardDivs[i + 1].classList.contains('bomb')) bombTotal++ // checks right of square
-//         if(i > width - 1 && !isLeftSide && boardDivs[i - width - 1].classList.contains('bomb')) bombTotal++ //checks top left of square
-//         if(i > width - 1 && boardDivs[i - width].classList.contains('bomb')) bombTotal++ // checks above square
-//         if(i > width - 1 && !isRightSide && boardDivs[i - width + 1].classList.contains('bomb')) bombTotal++ //checks top right of square
-//         if(i < width * width - width && !isLeftSide && boardDivs[i + width - 1].classList.contains('bomb')) bombTotal++//checks bottom left square
-//         if(i < width * width - width && boardDivs[i + width].classList.contains('bomb')) bombTotal++ //checks below square
-//         if(i < width * width - width && !isRightSide && boardDivs[i + width + 1].classList.contains('bomb')) bombTotal++ //checks bottom right square
-//         boardDivs[i].data = bombTotal;
-//         if(bombTotal == 0){
-//         boardDivs[i].data = 'empty';
-//         }
-//     } else {
-//         boardDivs[i].data = 'bomb';
-//         boardDivs[i].classList.add('highlight');
-//     }
+//     });
+//      });
 
-// }
-}
+
 
      function click(tile){
-        // console.log(tile)
+        console.log(tile)
         let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
         if(isGameOver)return;
         if (tile.classList.contains('safeclicked')) return;
