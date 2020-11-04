@@ -79,6 +79,7 @@ function createBoard() {
             }
         } else {
             boardDivs[i].data = 'bomb';
+            boardDivs[i].classList.add('highlight');
         }
 
     
@@ -134,36 +135,41 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
              { const isLeftSide = tile.id % width === 0; //defines which div numbers are on the left side of the grid
                 const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
 
-                    if(tile.id > 0 && !isLeftSide) {
-                        // console.log(typeof clickedId)
-                        let leftIdNum = clickedId - 1;
-                        // console.log(typeof leftIdNum)
-                        let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
-                        click(leftSquare); //we are clicking on the square to the left
-                    } else if(tile.id > 0 && !isRightSide) {
-                        let rightIdNum = clickedId + 1;
-                        let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
-                        console.log(clickedId)
-                        console.log(rightIdNum)
-                        click(rightSquare); //we are clicking on the square to the right
-                    } else if(tile.id > width - 1)
-                    // if(i > 0 && !isRightSide && boardDivs[i + 1].classList.contains('bomb')) bombTotal++ // checks right of square
-                    // if(i > width - 1 && !isLeftSide && boardDivs[i - width - 1].classList.contains('bomb')) bombTotal++ //checks top left of square
-                    // if(i > width - 1 && boardDivs[i - width].classList.contains('bomb')) bombTotal++ // checks above square
-                    // if(i > width - 1 && !isRightSide && boardDivs[i - width + 1].classList.contains('bomb')) bombTotal++ //checks top right of square
-                    // if(i < width * width - width && !isLeftSide && boardDivs[i + width - 1].classList.contains('bomb')) bombTotal++//checks bottom left square
-                    // if(i < width * width - width && boardDivs[i + width].classList.contains('bomb')) bombTotal++ //checks below square
-                    // if(i < width * width - width && !isRightSide && boardDivs[i + width + 1].classList.contains('bomb')) bombTotal++ //checks bottom right square
-                    // boardDivs[i].data = bombTotal;
-                    // if(bombTotal == 0){
-                    // boardDivs[i].data = 'empty';
+                    // if(tile.id > 0 && !isLeftSide) { // we are checking all the tiles to the left of the clicked tile
+                    //     // console.log(typeof clickedId)
+                    //     let leftIdNum = clickedId - 1;
+                    //     // console.log(typeof leftIdNum)
+                    //     let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
+                    //     click(leftSquare); //we are clicking on the square to the left
                     // }
+                    
+                    // if(tile.id > 0 && !isRightSide) { // we are checking all the tiles to the right of the clicked tile
+                    //     let rightIdNum = clickedId + 1;
+                    //     let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
+                    //     // console.log(clickedId)
+                    //     // console.log(rightIdNum)
+                    //     click(rightSquare); //we are clicking on the square to the right
+                    // }
+                    
+                    if(tile.id > width - 1){ // we are checking all the tiles above the clicked tile
+                        let aboveIdNum = clickedId - width;
+                        let aboveSquare = document.getElementById(aboveIdNum); //we are grabbing the square right above the current clicked
+                        click(aboveSquare);
+                    }
+
+                    if(tile.id < width * width - width){ // we are checking all the tiles above the clicked tile
+                        let belowIdNum = clickedId + width;
+                        let belowSquare = document.getElementById(belowIdNum); //we are grabbing the square right above the current clicked
+                        click(belowSquare);
+                    }
+
+                    
+         
            
 
-
-             
-
-         }
+         } else if(tile.data > 0){ // we are only clicking the one tile if it contains a number
+            tile.innerText = tile.data;
+        }
      }
 
     //  boardDivs.forEach(function(clickedTile){

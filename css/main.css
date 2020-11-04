@@ -28,3 +28,7 @@ div.bomb:hover, div.safe:hover {
 .safeclicked{
   background-color: lightgrey;
 }
+
+.bomb{
+  background-color: lightsalmon;
+}
