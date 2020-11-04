@@ -119,7 +119,9 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
 
 
      function click(tile){
-         console.log(tile)
+        // console.log(tile)
+        let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
+        tile.classList.add('safeclicked') // to change the color of the square and show it's clicked
         let bombClick = document.getElementsByClassName('bomb');
          if(tile.classList.contains('bomb')){ // if a bomb tile is clicked
 
@@ -133,14 +135,18 @@ let firstClick; //cannot be a bomb, so will be a number or empty space
                 const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
 
                     if(tile.id > 0 && !isLeftSide) {
-                        let clickedId = tile.id; // the number is listed as a string
-                        tile.classList.add('safeclicked') // to change the color of the square and show it's clicked
                         // console.log(typeof clickedId)
-                        let leftIdNum = parseInt(tile.id - 1); //adding parseInt to make it a number
+                        let leftIdNum = clickedId - 1;
                         // console.log(typeof leftIdNum)
-                        let leftSquare = document.getElementById(leftIdNum)
-                        click(leftSquare)
-                    }
+                        let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
+                        click(leftSquare); //we are clicking on the square to the left
+                    } else if(tile.id > 0 && !isRightSide) {
+                        let rightIdNum = clickedId + 1;
+                        let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
+                        console.log(clickedId)
+                        console.log(rightIdNum)
+                        click(rightSquare); //we are clicking on the square to the right
+                    } else if(tile.id > width - 1)
                     // if(i > 0 && !isRightSide && boardDivs[i + 1].classList.contains('bomb')) bombTotal++ // checks right of square
                     // if(i > width - 1 && !isLeftSide && boardDivs[i - width - 1].classList.contains('bomb')) bombTotal++ //checks top left of square
                     // if(i > width - 1 && boardDivs[i - width].classList.contains('bomb')) bombTotal++ // checks above square
