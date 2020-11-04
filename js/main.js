@@ -69,9 +69,12 @@ function createBoard() {
             if(i < width * width - width && !isLeftSide && boardDivs[i + width - 1].classList.contains('bomb')) bombTotal++//checks bottom left square
             if(i < width * width - width && boardDivs[i + width].classList.contains('bomb')) bombTotal++ //checks below square
             if(i < width * width - width && !isRightSide && boardDivs[i + width + 1].classList.contains('bomb')) bombTotal++ //checks bottom right square
-            boardDivs[i].innerText = bombTotal;
+            boardDivs[i].id = bombTotal;
+            if(bombTotal == 0){
+            boardDivs[i].id = 'empty';
+            }
         } else {
-            boardDivs[i].innerText = 'bomb';
+            boardDivs[i].id = 'bomb';
         }
 
     
@@ -94,4 +97,77 @@ createBoard();
 
 
 let firstClick; //cannot be a bomb, so will be a number or empty space
+
+[...document.querySelectorAll('.bomb')].forEach(function(bombDiv) { // when you click one bomb, all other bombs appear
+    bombDiv.addEventListener('click', function() {
+        // firstBomb.innerText = '💣';
+        // firstBomb.className = 'clickedbomb';  
+        let bombClick = document.getElementsByClassName('bomb');
+        console.log(bombClick)
+        for (i = 0; i < bombClick.length; i++){
+        bombClick[i].innerText = '💣'; 
+        // bombClick[i].className = 'bombclicked';
+          }
+
+    });
+     });
+
+
+    //  boardDivs.forEach(function(clickedTile){
+    //     clickedTile.addEventListener('click', function(){
+    //         if(clickedTile.value === 'empty'){
+    //             console.log(clickedTile)
+    //         //   for(i = indexOf(clickedTile) - 1; i < indexOf(clickedTile) + 1; i++){ 
+    //         //        console.log([i]);
+    //         //   }
+    //         }
+
+    //     })
+    // })
+
+// let childrenDiv = document.querySelectorAll('div > div');
+
+// console.log(...childrenDiv)
+
+
+// console.log(...boardDivs)
+
+// childrenDiv.forEach(tileDiv => {
+//     tileDiv.addEventListener('click', function() {    
+//      if (tileDiv.classList.contains('safe')){
+//          let tileIndex = childrenDiv.index(tileDiv);
+//          console.log(tileDiv)
+        // for (let i = childrenDiv.indexOf(tileDiv) - 1; i < childrenDiv.indexOf(tileDiv) + 1; i++)
+        // childrenDiv[i].innerText = childrenDiv[i].id;
+        // if(childrenDiv[i] > 0 && !isLeftSide && childrenDiv[i - 1].classList.contains('safe')){
+        //     childrenDiv[i -1].innerText = childrenDiv[i - 1].id;
+        // }
+    // for (let i = 0; i < childrenDiv.length; i++){
+    //     const isLeftSide = i % width === 0; //defines which div numbers are on the left side of the grid
+    //     const isRightSide = i % width === width - 1; //defines which div numbers are on the right side of the grid
+    
+    //         if (childrenDiv[i].classList.contains('safe')) {
+    //             childrenDiv[i].innerText = boardDivs[i].id;
+    //             if(childrenDiv[i] > 0 && !isLeftSide && childrenDiv[i - 1].classList.contains('safe')){
+    //                 continue;
+    //             }
+    //         }
+    
+    //     }
+//         }
+//     // );
+//     })
+// // })
+
+
+// childrenDiv.forEach(function(tileDiv, index){
+//     tileDiv.addEventListener('click', function() {    
+//         if (tileDiv.classList.contains('safe')){
+
+//             console.log(tileDiv(index + 1))
+//             console.log(index)
+//             }
+//      } )
+//     }
+// )
 

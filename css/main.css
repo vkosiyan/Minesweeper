@@ -20,3 +20,7 @@ div.bomb:hover, div.safe:hover {
   background-color: white;
 
 }
+
+.bombclicked {
+  background-color: #d3d3d3;
+}
