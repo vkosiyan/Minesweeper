@@ -1,5 +1,4 @@
 /*----- constants -----*/
-const grid = document.querySelector('.grid');
 let width = 10; // this will be the width and height of the board
 let tileNum = width * width; 
 let bombName = 'bomb'; // class name for a bomb
@@ -20,10 +19,9 @@ let blankFlagged = 0;
 const boardTiles = []; 
 
 // cached element references ========================================
-
+const grid = document.querySelector('.grid');
 
 // Creating the grid for the game ==================================
-
 
 function createBoard() {
     for(let i = 0; i < tileNum; i++) { //we will create as many tiles depending on the width of the board and multiply so that the board is a square
@@ -39,7 +37,6 @@ function createBoard() {
 
         } else {
             firstClick(tile);
-            console.log('this is the first click')
             click(tile);
         }
       })
@@ -76,7 +73,6 @@ window.addEventListener('load', createBoard());
 function firstClick(tile){ //cannot be a bomb, so will be a number or empty space
     let clickedId = parseInt(tile.id); 
     tile.className = 'safe';
-    console.log(clickedId)
 for (i = 0; i < width * width; i++){ // we are adding class names to each div with a number as an id so each square is labeled as either bomb or safe
     let gridBlocks = document.getElementById([i]);
     if(gridBlocks.className === 'safe') { continue; } // since the first tile we clicked has already been assigned 'safe', we will skip over it and assign classes to the rest
@@ -109,191 +105,100 @@ const isRightSide = i % width === width - 1; //defines which div numbers are on 
 }
 } // end of firstClick() function
 
-     function click(tile){
-        // console.log(tile)
-        console.log('first button is already clicked')
-        let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
-        if(isGameOver)return;
-        if (tile.classList.contains('safeclicked')) return;
-        tile.classList.add('safeclicked') // to change the color of the square and show it's clicked
-        let bombClick = document.getElementsByClassName('bomb');
+function click(tile){
+    let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
+    if(isGameOver)return;
+    if (tile.classList.contains('safeclicked')) return;
+    tile.classList.add('safeclicked') // to change the color of the square and show it's clicked
+    let bombClick = document.getElementsByClassName('bomb');
 
-         if(tile.classList.contains('bomb')){ // if a bomb tile is clicked
+        if(tile.classList.contains('bomb')){ // if a bomb tile is clicked
 
-            for (i = 0; i < bombClick.length; i++){
-                bombClick[i].innerText = '💣'; 
-                bombClick[i].classList.add('bombclicked');
-                // bombClick[i].className = 'bombclicked';
-                  }
-            window.alert("Game Over");
-            isGameOver = true;      
-         } else if(tile.classList.contains('safe') && tile.data === 'empty') //if an empty tile is clicked
-             { const isLeftSide = tile.id % width === 0; //defines which div numbers are on the left side of the grid
-                const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
-                    if(tile.classList.contains('flagged')){
-                        tile.classList.remove('flagged');
-                        blankFlagged--;
-                        if(tile.data = 'empty'){
-                            tile.innerText = '';
-                        }
+        for (i = 0; i < bombClick.length; i++){
+            bombClick[i].innerText = '💣'; 
+            bombClick[i].classList.add('bombclicked');
+            // bombClick[i].className = 'bombclicked';
+                }
+        window.alert("Game Over");
+        isGameOver = true;    
+
+        } else if(tile.classList.contains('safe') && tile.data === 'empty'){ //if an empty tile is clicked
+
+        const isLeftSide = tile.id % width === 0; //defines which div numbers are on the left side of the grid
+        const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
+            if(tile.classList.contains('flagged')){
+                tile.classList.remove('flagged');
+                blankFlagged--;
+                if(tile.data = 'empty'){
+                    tile.innerText = '';
                     }
-                    if(tile.id > 0 && !isLeftSide) { // we are checking all the tiles to the left of the clicked tile
-                        // console.log(typeof clickedId)
-                        let leftIdNum = clickedId - 1;
-                        // console.log(typeof leftIdNum)
-                        let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
-                        click(leftSquare); //we are clicking on the square to the left
-                        
-                    }
-                    
-                    if(tile.id > 0 && !isRightSide) { // we are checking all the tiles to the right of the clicked tile
-                        let rightIdNum = clickedId + 1;
-                        let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
-                        // console.log(clickedId)
-                        // console.log(rightIdNum)
-                        click(rightSquare); //we are clicking on the square to the right
-                    }
-                    
-                    if(tile.id > width){ // we are checking all the tiles above the clicked tile
-                        let aboveIdNum = clickedId - width;
-                        let aboveSquare = document.getElementById(aboveIdNum); //we are grabbing the square right above the current clicked
-                        click(aboveSquare);
-                    }
+            }
+                
+            if(tile.id > 0 && !isLeftSide) { // we are checking all the tiles to the left of the clicked tile
+                let leftIdNum = clickedId - 1;                    
+                let leftSquare = document.getElementById(leftIdNum) // we are grabbing the square to the left of the current clicked
+                click(leftSquare); //we are clicking on the square to the left                       
+            }
+                
+            if(tile.id > 0 && !isRightSide) { // we are checking all the tiles to the right of the clicked tile
+                let rightIdNum = clickedId + 1;
+                let rightSquare = document.getElementById(rightIdNum); //we are grabbing the square to the right of the current clicked
+                click(rightSquare); //we are clicking on the square to the right
+            }
+                
+            if(tile.id > width){ // we are checking all the tiles above the clicked tile
+                let aboveIdNum = clickedId - width;
+                let aboveSquare = document.getElementById(aboveIdNum); //we are grabbing the square right above the current clicked
+                click(aboveSquare);
+            }
 
-                    if(tile.id > width && !isLeftSide && tile.id > width + 1){ // we are checking all the tiles the top left of the clicked tile
-                        let topLeftIdNum = clickedId - width - 1;
-                        let topLeftSquare = document.getElementById(topLeftIdNum);
-                        click(topLeftSquare);
-                    }       
+            if(tile.id > width && !isLeftSide && tile.id > width + 1){ // we are checking all the tiles the top left of the clicked tile
+                let topLeftIdNum = clickedId - width - 1;
+                let topLeftSquare = document.getElementById(topLeftIdNum);
+                click(topLeftSquare);
+            }       
 
-                    if(tile.id < width * width - width){ // we are checking all the tiles below the clicked tile  **GOOD**
-                        let belowIdNum = clickedId + width;
-                        let belowSquare = document.getElementById(belowIdNum); //we are grabbing the square right above the current clicked
-                        click(belowSquare);
-                    }
+            if(tile.id < width * width - width){ // we are checking all the tiles below the clicked tile  **GOOD**
+                let belowIdNum = clickedId + width;
+                let belowSquare = document.getElementById(belowIdNum); //we are grabbing the square right above the current clicked
+                click(belowSquare);
+            }
 
-
-                    // if(tile.id < width * width - width - 1 && !isRightSide && tile.id > width - 1){ // we are checking all the tiles the top right of the clicked tile 
-                    //     let topRightIdNum = clickedId - width + 1;
-                    //     let topRightSquare = document.getElementById(topRightIdNum);
-                    //     click(topRightSquare);
-                    // }
-
-                    // if(tile.id > 0 && !isLeftSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom left **GOOD**
-                    //     let bottomLeftIdNum = clickedId + width -1;
-                    //     let bottomLeftSquare = document.getElementById(bottomLeftIdNum);
-                    //     click(bottomLeftSquare); 
-                    // }
-
-                    // if(tile.id > width - 1 && !isRightSide && tile.id < width * width - width - 1){ // we are checking all the tiles bottom right **GOOD**
-                    //     let bottomRightIdNum = clickedId + width + 1;
-                    //     let bottomRightSquare = document.getElementById(bottomRightIdNum);
-                    //    click(bottomRightSquare);
-                    // }
-                                    
-
-         } else if(tile.data > 0){ // we are only clicking the one tile if it contains a number
-            tile.innerText = tile.data;
-        }
+        } else if(tile.data > 0){ // we are only clicking the one tile if it contains a number
+        tile.innerText = tile.data;
+    }
      }
 
-     function flagTile(tile){
-        // console.log(tile)
-        let rightClickedId = parseInt(tile.id);  // adding parseInt to make it a number
-        if(isGameOver)return;
-        if (tile.classList.contains('safeclicked')) return;
+function flagTile(tile){
+    let rightClickedId = parseInt(tile.id);  // adding parseInt to make it a number
+    if(isGameOver)return;
+    if (tile.classList.contains('safeclicked')) return;
 
+    if(tile.classList.contains('flagged')){ // to remove a flag from any tile already flagged
+        tile.classList.remove('flagged');
+        tile.innerText = '';
+        if(tile.classList.contains('bomb')) bombsFlagged--
+        if(tile.classList.contains('safe')) blankFlagged--
 
-        if(tile.classList.contains('flagged')){ // to remove a flag from any tile already flagged
-            tile.classList.remove('flagged');
-            tile.innerText = '';
-            if(tile.classList.contains('bomb')) bombsFlagged--
-            if(tile.classList.contains('safe')) blankFlagged--
+        if(tile.classList.contains('safe') && bombsFlagged > numOfBombs - 1 && blankFlagged < 1){
+            isGameOver = true;
+            window.alert('Congrats, you won!')
+        }
 
-            if(tile.classList.contains('safe') && bombsFlagged > numOfBombs - 1 && blankFlagged < 1){
+    } else {
+        tile.classList.add('flagged');
+        tile.innerText = '🚩';
+
+        if(tile.classList.contains('safe')){
+            blankFlagged++
+    } else if(tile.classList.contains('bomb') && bombsFlagged < numOfBombs){
+
+            bombsFlagged++
+            if (bombsFlagged === numOfBombs && blankFlagged < 1){
                 isGameOver = true;
                 window.alert('Congrats, you won!')
             }
-            console.log(bombsFlagged)     
-
-        } else {
-
-            tile.classList.add('flagged');
-            tile.innerText = '🚩';
-
-            if(tile.classList.contains('safe')){
-                blankFlagged++
-                console.log('blank flagged: ' + blankFlagged)
-
-            } else if(tile.classList.contains('bomb') && bombsFlagged < numOfBombs){
-
-                bombsFlagged++
-                if (bombsFlagged === numOfBombs && blankFlagged < 1){
-                    isGameOver = true;
-                    window.alert('Congrats, you won!')
-                }
-                console.log(bombsFlagged)
-
-            } 
-
-        
+        }   
     }            
-     };
-    //  boardDivs.forEach(function(clickedTile){
-    //     clickedTile.addEventListener('click', function(){
-    //         if(clickedTile.value === 'empty'){
-    //             console.log(clickedTile)
-    //         //   for(i = indexOf(clickedTile) - 1; i < indexOf(clickedTile) + 1; i++){ 
-    //         //        console.log([i]);
-    //         //   }
-    //         }
-
-    //     })
-    // })
-
-// let childrenDiv = document.querySelectorAll('div > div');
-
-// console.log(...childrenDiv)
-
-
-// console.log(...boardDivs)
-
-// childrenDiv.forEach(tileDiv => {
-//     tileDiv.addEventListener('click', function() {    
-//      if (tileDiv.classList.contains('safe')){
-//          let tileIndex = childrenDiv.index(tileDiv);
-//          console.log(tileDiv)
-//         for (let i = childrenDiv.indexOf(tileDiv) - 1; i < childrenDiv.indexOf(tileDiv) + 1; i++)
-//         childrenDiv[i].innerText = childrenDiv[i].id;
-//         if(childrenDiv[i] > 0 && !isLeftSide && childrenDiv[i - 1].classList.contains('safe')){
-//             childrenDiv[i -1].innerText = childrenDiv[i - 1].id;
-//         }
-//     for (let i = 0; i < childrenDiv.length; i++){
-//         const isLeftSide = i % width === 0; //defines which div numbers are on the left side of the grid
-//         const isRightSide = i % width === width - 1; //defines which div numbers are on the right side of the grid
-    
-//             if (childrenDiv[i].classList.contains('safe')) {
-//                 childrenDiv[i].innerText = boardDivs[i].id;
-//                 if(childrenDiv[i] > 0 && !isLeftSide && childrenDiv[i - 1].classList.contains('safe')){
-//                     continue;
-//                 }
-//             }
-    
-//         }
-//         }
-//     // );
-//     })
-// })
-
-
-// childrenDiv.forEach(function(tileDiv, index){
-//     tileDiv.addEventListener('click', function() {    
-//         if (tileDiv.classList.contains('safe')){
-
-//             console.log(tileDiv(index + 1))
-//             console.log(index)
-//             }
-//      } )
-//     }
-// )
-
+    };
+   
