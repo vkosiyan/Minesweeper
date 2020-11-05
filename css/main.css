@@ -5,6 +5,8 @@
   width: 600px;
   background-color: grey;
   justify-content: center;
+  border-style: double;
+
 }
 
 
@@ -14,6 +16,9 @@
   border: black;
   border-width: 1px;
   border-style: dashed;
+  display: flex;
+  justify-content: center;
+
 }
 
 div.bomb:hover, div.safe:hover {
@@ -23,6 +28,7 @@ div.bomb:hover, div.safe:hover {
 
 .bombclicked {
   background-color: red;
+
 }
 
 .safeclicked{

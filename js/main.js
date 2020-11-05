@@ -148,7 +148,13 @@ const isRightSide = i % width === width - 1; //defines which div numbers are on 
          } else if(tile.classList.contains('safe') && tile.data === 'empty') //if an empty tile is clicked
              { const isLeftSide = tile.id % width === 0; //defines which div numbers are on the left side of the grid
                 const isRightSide = tile.id % width === width - 1; //defines which div numbers are on the right side of the grid
-
+                    if(tile.classList.contains('flagged')){
+                        tile.classList.remove('flagged');
+                        blankFlagged--;
+                        if(tile.data = 'empty'){
+                            tile.innerText = '';
+                        }
+                    }
                     if(tile.id > 0 && !isLeftSide) { // we are checking all the tiles to the left of the clicked tile
                         // console.log(typeof clickedId)
                         let leftIdNum = clickedId - 1;
@@ -222,7 +228,7 @@ const isRightSide = i % width === width - 1; //defines which div numbers are on 
             if(tile.classList.contains('bomb')) bombsFlagged--
             if(tile.classList.contains('safe')) blankFlagged--
 
-            if(tile.classList.contains('safe') && bombsFlagged > numOfBombs - 1){
+            if(tile.classList.contains('safe') && bombsFlagged > numOfBombs - 1 && blankFlagged < 1){
                 isGameOver = true;
                 window.alert('Congrats, you won!')
             }
@@ -240,13 +246,13 @@ const isRightSide = i % width === width - 1; //defines which div numbers are on 
             } else if(tile.classList.contains('bomb') && bombsFlagged < numOfBombs){
 
                 bombsFlagged++
+                if (bombsFlagged === numOfBombs && blankFlagged < 1){
+                    isGameOver = true;
+                    window.alert('Congrats, you won!')
+                }
                 console.log(bombsFlagged)
 
-            } else if (tile.classList.contains('bomb') && bombsFlagged < numOfBombs && blankFlagged < 1){
-                
-                isGameOver = true;
-                window.alert('Congrats, you won!')
-            }
+            } 
 
         
     }            
