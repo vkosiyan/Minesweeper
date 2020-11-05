@@ -1,29 +1,37 @@
+body {
+  color: teal;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  text-align: center;
+  
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
-  height: 600px;
-  width: 600px;
-  background-color: grey;
-  justify-content: center;
-  border-style: double;
+  height: 500px;
+  width: 500px;
 
+  justify-content: center;
+  border-radius: 15px;
+  padding: 1px;
 }
 
 
 .grid div{
-  height: 55px;
-  width: 55px;
+  height: 45px;
+  width: 45px;
   border: black;
   border-width: 1px;
-  border-style: dashed;
-  display: flex;
-  justify-content: center;
-
+  border-style: solid;
+  text-align: center;
+  border-radius: 10%;
+  padding: 1px;
+  background-color: lightblue;
 }
 
-div.bomb:hover, div.safe:hover {
+.grid div:hover{
   background-color: white;
-
 }
 
 .bombclicked {
@@ -31,7 +39,7 @@ div.bomb:hover, div.safe:hover {
 
 }
 
-.safeclicked{
+.grid .safeclicked{
   background-color: lightgrey;
 }
 
