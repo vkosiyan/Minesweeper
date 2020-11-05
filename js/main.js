@@ -4,7 +4,9 @@ let tileNum = width * width;
 let bombName = 'bomb'; // class name for a bomb
 let blankName = 'safe' // class name for a blank square
 let bombText = '💣'; // what the innerText of a bomb square will say
+let flagText = '🚩'
 let blankTile = ''; // what the innerText of a blank square will say
+const boardArray = []; //we are creating an array that has both bombs and safe in the array
 const numOfBombs = 10; // number of bombs in the game
 const numOfBlanks = tileNum - numOfBombs; //number of blank squares in the game. We are subtracting one because the first in the shuffled array will be safe for the first click
 
@@ -20,11 +22,12 @@ const boardTiles = [];
 
 // cached element references ========================================
 const grid = document.querySelector('.grid');
-
+const newGame = document.querySelector('button');
 // Creating the grid for the game ==================================
 
+
 function createBoard() {
-    for(let i = 0; i < tileNum; i++) { //we will create as many tiles depending on the width of the board and multiply so that the board is a square
+    for(i = 0; i < tileNum; i++) { //we will create as many tiles depending on the width of the board and multiply so that the board is a square
 
     let tile = document.createElement('div'); // this is to create the div element for each
     tile.setAttribute('id', i); //we are setting the id to tile number using the i as a counter
@@ -47,12 +50,10 @@ function createBoard() {
       }
 
     }
-
     const bombArray = Array(numOfBombs).fill(bombName); 
     const blankArray = Array(numOfBlanks).fill(blankName);
     
 
-    const boardArray = []; //we are creating an array that has both bombs and safe in the array
     boardArray.push(...bombArray);
     boardArray.push(...blankArray);
 
@@ -66,9 +67,17 @@ function createBoard() {
 //====================================================================
 
 
-
 // event listeners ================================================================
 window.addEventListener('load', createBoard());
+newGame.addEventListener('click', restartGame);
+
+
+// functions ================================================================
+
+function shuffle(){ // we are randomizing the order of the bombs and blank areas
+    const shuffled = boardArray.sort(() => Math.random() - 0.5);
+    boardTiles.push(...shuffled);
+    }
 
 function firstClick(tile){ //cannot be a bomb, so will be a number or empty space
     let clickedId = parseInt(tile.id); 
@@ -79,7 +88,6 @@ for (i = 0; i < width * width; i++){ // we are adding class names to each div wi
     gridBlocks.className = boardTiles[i];
     }
 firstTileIsClicked = true; // once the first click is made, firstTileisClicked is triggered so that the next click will just be regular click
-
 
 for (let i = 0; i < boardTiles.length; i++){ //add numbers to squares
 let bombTotal = 0;    
@@ -105,7 +113,7 @@ const isRightSide = i % width === width - 1; //defines which div numbers are on 
 }
 } // end of firstClick() function
 
-function click(tile){
+function click(tile){ // this is for any click that is not the first click
     let clickedId = parseInt(tile.id);  // adding parseInt to make it a number
     if(isGameOver)return;
     if (tile.classList.contains('safeclicked')) return;
@@ -169,7 +177,7 @@ function click(tile){
     }
      }
 
-function flagTile(tile){
+function flagTile(tile){ // this is for right clicks to flag or unflag a tile
     let rightClickedId = parseInt(tile.id);  // adding parseInt to make it a number
     if(isGameOver)return;
     if (tile.classList.contains('safeclicked')) return;
@@ -187,7 +195,7 @@ function flagTile(tile){
 
     } else {
         tile.classList.add('flagged');
-        tile.innerText = '🚩';
+        tile.innerText = flagText;
 
         if(tile.classList.contains('safe')){
             blankFlagged++
@@ -202,3 +210,23 @@ function flagTile(tile){
     }            
     };
    
+function restartGame(){ //button to restart the board for a new game
+    for (i = 0; i < boardDivs.length; i++){
+    boardDivs[i].className = '';
+    boardDivs[i].innerText = '';
+    bombTotal = 0;
+    blankFlagged = 0;
+    bombsFlagged = 0;
+    isGameOver = false;
+    firstTileIsClicked = false;
+    boardTiles.length = 0;
+    shuffle();
+    }
+    console.log(boardTiles)  
+}
+
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }

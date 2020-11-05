@@ -3,7 +3,8 @@ body {
   font-family: 'Arial', sans-serif;
   margin: 0;
   text-align: center;
-  
+  background-image:url(../images/spacebg.jpg);
+
 }
 
 .grid {
@@ -16,7 +17,6 @@ body {
   border-radius: 15px;
   padding: 1px;
 }
-
 
 .grid div{
   height: 45px;
@@ -33,16 +33,79 @@ body {
 .grid div:hover{
   background-color: white;
 }
-
-.bombclicked {
-  background-color: red;
-
-}
-
 .grid .safeclicked{
   background-color: lightgrey;
 }
+.grid .bombclicked{
+  background-color: coral;
+  content:url(../images/among-us.png);
 
-.bomb{
- background-color: lightsalmon;
+}
+
+button {
+  background-color: teal;
+  border: double;
+  border-width: 2px;
+  color: white;
+  padding: 15px 35px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+
+/* Character image to click on for pop up*/
+.popup {
+  position: relative;
+  flex-wrap: wrap;
+  cursor: pointer;
+  float: inline-star; 
+  margin: 50px;
+}
+
+/* Pop Up Bubble */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow to make the popup a speech bubble*/
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* To hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Fade in and fade out animation */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }
