@@ -1,10 +1,9 @@
 body {
   color: teal;
-  font-family: 'Arial', sans-serif;
+  font-family: "Lucida Console", Courier, monospace;
   margin: 0;
   text-align: center;
   background-image:url(../images/spacebg.jpg);
-
 }
 
 .grid {
@@ -12,7 +11,6 @@ body {
   flex-wrap: wrap;
   height: 500px;
   width: 500px;
-
   justify-content: center;
   border-radius: 15px;
   padding: 1px;
@@ -42,7 +40,22 @@ body {
   content:url(../images/among-us.png);
 }
 
+.rules{
+  background-color: gray;
+  opacity: 0.5;
+  color: white;
+  text-shadow: 5px 5px #00000;
+  text-align: center;
+  padding: 50px 10px;
+}
 
+h3{
+  text-decoration: underline;
+}
+
+.rules:hover{
+  opacity: 1.0;
+}
 
 button {
   background-color: teal;
@@ -52,7 +65,6 @@ button {
   padding: 15px 35px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
 }
 
@@ -66,7 +78,7 @@ button {
   margin: 50px;
 }
 
-/* Pop Up Bubble */
+/* Pop Up Speech Bubble */
 .popup .popuptext {
   visibility: hidden;
   width: 160px;
@@ -101,10 +113,7 @@ button {
   animation: fadeIn 1s
 }
 
-
-
 /* Game Pop Ups (New Game, GameOver Win, GameOver Lose */
-
 .newGame {
   visibility: hidden;
   position: absolute;
@@ -129,7 +138,6 @@ button {
   width: 500px;
   background-color: black;
 }
-
 
 /* Fade in and fade out animation */
 @-webkit-keyframes fadeIn {

@@ -9,6 +9,7 @@
   <script defer src="js/main.js"></script>
 </head>
 <body>
+<!-- Game Sound Effects -->
     <audio id="newgameaudio">
         <source src="audio/newgame.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -21,42 +22,47 @@
         <source src="audio/defeat.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+<!-- End Game Sound Effects -->
 <center>
    <table>
     <tr>
-        <th>            
-     <div class="popup">
-        <img src="images/amgusdeco.png" width="150px"></img>
-        <span class="popuptext" id="speechBubble">Suspect all the imposters with right-click. <br><br>Don't left-click on them though, or it's game over!</span>
-    </div>
+        <th>         
+            <div class="popup">
+                <img src="images/amgusdeco.png" width="150px"></img>
+                <span class="popuptext" id="speechBubble">Suspect all 10 imposters with right-click to win. <br><br>Don't left-click on them though, or it's game over!</span>
+            </div>
         </th>
         <th>
             <h1>Imposter Sweeper</h1>
-
+<!-- Animation Pop Up Divs -->
             <div class="newGame">
-            <p><img src="images/amongus-shh.gif"></img></p>
+                <p><img src="images/amongus-shh.gif"></img></p>
             </div>
 
             <div class="loseGif">
                 GAME OVER
-            <p><img src="images/alien-death.gif"></img></p>
+                <p><img src="images/alien-death.gif"></img></p>
             </div>
 
             <div class="winGif">
-            <p><img src="images/victory.gif"></img></p>
+                <p><img src="images/victory.gif"></img></p>
             </div>
-    <div class="grid"></div> 
-
-        <button id="test">New Game</button>
+<!-- Animation Pop Up Divs -->
+            <div class="grid"></div> <!-- Container for the board game -->
+            <button id="test">Start New Game</button>
         </th>
         <th width="150px">
-
+            <div class="rules">
+                <h3>Your Tasks:</h3> <!-- Small rules bar -->                
+                Suspect all the imposters (10 total). You can't win if there are more suspicions than there are imposters.<br><br>
+               <h3> Suspicions Used: </h3>
+                <div id="counter"></div>
+                <div class="bombcounter"></div>
+            </div>
         </th>
     </tr>
 </table>
-    
-
-
+   
 </center>
 </body>
 
