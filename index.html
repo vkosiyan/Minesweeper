@@ -4,23 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Dogsweeper</title>
+  <title>Imposter Sweeper</title>
   <link rel="stylesheet" href="css/main.css">
   <script defer src="js/main.js"></script>
 </head>
 <body>
-
+    <audio id="newgameaudio">
+        <source src="audio/newgame.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="victoryaudio">
+        <source src="audio/victory.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="defeataudio">
+        <source src="audio/defeat.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 <center>
    <table>
     <tr>
         <th>            
      <div class="popup">
         <img src="images/amgusdeco.png" width="150px"></img>
-        <span class="popuptext" id="speechBubble">Suspect all the imposters, but don't let them catch you!</span>
+        <span class="popuptext" id="speechBubble">Suspect all the imposters with right-click. <br><br>Don't left-click on them though, or it's game over!</span>
     </div>
         </th>
         <th>
             <h1>Imposter Sweeper</h1>
+
+            <div class="newGame">
+            <p><img src="images/amongus-shh.gif"></img></p>
+            </div>
+
+            <div class="loseGif">
+                GAME OVER
+            <p><img src="images/alien-death.gif"></img></p>
+            </div>
+
+            <div class="winGif">
+            <p><img src="images/victory.gif"></img></p>
+            </div>
     <div class="grid"></div> 
 
         <button id="test">New Game</button>
@@ -31,6 +55,8 @@
     </tr>
 </table>
     
+
+
 </center>
 </body>
 

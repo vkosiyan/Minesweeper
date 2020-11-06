@@ -36,11 +36,13 @@ body {
 .grid .safeclicked{
   background-color: lightgrey;
 }
+
 .grid .bombclicked{
   background-color: coral;
   content:url(../images/among-us.png);
-
 }
+
+
 
 button {
   background-color: teal;
@@ -99,6 +101,36 @@ button {
   animation: fadeIn 1s
 }
 
+
+
+/* Game Pop Ups (New Game, GameOver Win, GameOver Lose */
+
+.newGame {
+  visibility: hidden;
+  position: absolute;
+}
+
+.loseGif{
+  font-size: 30px;
+  color: red;
+  visibility: hidden;
+  position: absolute;
+  text-align : center;
+  border: .5em solid black;
+  background-color: black;
+}
+
+.winGif{
+  font-size: 30px;
+  color: white;
+  visibility: hidden;
+  position: absolute;
+  text-align : center;
+  width: 500px;
+  background-color: black;
+}
+
+
 /* Fade in and fade out animation */
 @-webkit-keyframes fadeIn {
   from {opacity: 0;}
@@ -109,3 +141,4 @@ button {
   from {opacity: 0;}
   to {opacity:1 ;}
 }
+

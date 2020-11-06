@@ -4,7 +4,7 @@ let tileNum = width * width;
 let bombName = 'bomb'; // class name for a bomb
 let blankName = 'safe' // class name for a blank square
 let bombText = '💣'; // what the innerText of a bomb square will say
-let flagText = '🚩'
+let flagText = 'SUS'
 let blankTile = ''; // what the innerText of a blank square will say
 const boardArray = []; //we are creating an array that has both bombs and safe in the array
 const numOfBombs = 10; // number of bombs in the game
@@ -23,7 +23,13 @@ const boardTiles = [];
 // cached element references ========================================
 const grid = document.querySelector('.grid');
 const newGame = document.querySelector('button');
-let character = document.querySelector("img") //character decoration image on page
+let character = document.querySelector("img"); //character decoration image on page
+let newGameGif = document.querySelector(".newGame");
+let loseGif = document.querySelector(".loseGif");
+let winGif = document.querySelector(".winGif");
+let newGameAudio = document.querySelector("#newgameaudio");
+let victoryAudio = document.querySelector("#victoryaudio");
+let defeatAudio = document.querySelector("#defeataudio")
 // Creating the grid for the game ==================================
 
 
@@ -128,7 +134,7 @@ function click(tile){ // this is for any click that is not the first click
             bombClick[i].classList.add('bombclicked');
             // bombClick[i].className = 'bombclicked';
                 }
-        window.alert("Game Over");
+        loseAnimation(); // play losing animation
         isGameOver = true;    
 
         } else if(tile.classList.contains('safe') && tile.data === 'empty'){ //if an empty tile is clicked
@@ -191,7 +197,7 @@ function flagTile(tile){ // this is for right clicks to flag or unflag a tile
 
         if(tile.classList.contains('safe') && bombsFlagged > numOfBombs - 1 && blankFlagged < 1){
             isGameOver = true;
-            window.alert('Congrats, you won!')
+            winAnimation();
         }
 
     } else {
@@ -205,7 +211,7 @@ function flagTile(tile){ // this is for right clicks to flag or unflag a tile
             bombsFlagged++
             if (bombsFlagged === numOfBombs && blankFlagged < 1){
                 isGameOver = true;
-                window.alert('Congrats, you won!')
+                winAnimation();
             }
         }   
     }            
@@ -222,9 +228,12 @@ function restartGame(){ //button to restart the board for a new game
     firstTileIsClicked = false;
     boardTiles.length = 0;
     shuffle();
+    newGameAnimation();
+    if(winGif.style.visibility = "visible"){
+        winGif.style.visibility = "hidden";
+    }
     }
 }
-
 
 
 character.addEventListener("click", speechPopUp);
@@ -233,3 +242,30 @@ function speechPopUp(){
     popup.classList.toggle("show");
   }
 
+
+function newGameAnimation(){
+    newGameGif.style.visibility = "visible";
+    newGameAudio.play();
+    setTimeout(function () {
+        newGameGif.style.visibility = "hidden";
+    }, 2000);
+
+
+}
+
+function loseAnimation(){
+    loseGif.style.visibility = "visible";
+    defeatAudio.play();
+    setTimeout(function () {
+        loseGif.style.visibility = "hidden";
+    }, 2300);
+    setTimeout(function () {
+        defeatAudio.pause();;
+    }, 2300);
+}
+
+function winAnimation(){
+    winGif.style.visibility = "visible";
+    victoryAudio.play();
+
+}
