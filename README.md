@@ -4,8 +4,8 @@
 ## Table of Contents
 
 * [About the Project](#about-the-project)
-* [Technologies Used](#tech-used)
-* [Getting Started](#prerequisites)
+* [Technologies Used](#technologies-used)
+* [Getting Started](#getting-started)
 * [Next Steps](#next-steps)
 
 
@@ -43,7 +43,7 @@ There are also some fun themed animations and sounds that are triggered when the
 
 # Getting Started
 
-[Click to play the game](https://github.com/vkosiyan/Minesweeper)
+[Click to play the game](https://vkosiyan.github.io/Minesweeper)
 
 ## Controls
 * `Left-click` - reveals a block
@@ -52,16 +52,15 @@ There are also some fun themed animations and sounds that are triggered when the
 
 
 ## How to Play
-* You have a board with clickable squares
-* All squares are safe to click except for 10 imposter squares. If you click on the imposter squares, all the imposters will appear, and it will be game over
+* All squares are safe to click except for 10 imposter squares. If you click on an imposter square, all the imposters will appear, and then it's game over
 * Your first click will never be an imposter
 * If you open a square with no neighboring imposters, it will automatically open all neighbors until it reaches numbers
-* These numbers show how many bombs are touching it. It will check all cornes of its square (left, right, top left, above, top right, bottom left, below, and bottom right).
+* These numbers show how many bombs are touching it. It will check all sides and corners of its square (left, right, top left, above, top right, bottom left, below, and bottom right).
 * How to win:
     * Mark all suspected imposters with a "SUS"
-    * If you have marked any non-imposter squares with a "SUS", you must unmark them in order to win the game. You can use the "Suspicions Used" counter on the right Task Bar to keep track of your markings.
+    * If you have marked any non-imposter squares with a "SUS", you must unmark them in order to win the game. You can use the "Suspicions Used" counter in the right Task Bar to help keep track of your markings.
 
-* Click the "Start New Game" button to start a new game
+* Click the "Start New Game" button to load a new game and board
 
 
 # Next Steps
@@ -69,12 +68,18 @@ There are also some fun themed animations and sounds that are triggered when the
 ## Features I'd like to add to enhance this project:
 
 * Improve Marks Counter
-    * Make the counter turn red once it surpasses 10 SUS marks
+    * Make the suspicions counter turn red once it surpasses 10 SUS marks
 * Difficulty Levels 
-    * Add a dropdown menu with levels that change the number of tiles and imposters (bombs) on the board
+    * Add a dropdown menu with levels that change the number of tiles and imposters (bombs) on the board depening on the difficulty
+        * Easy
+        * Medium
+        * Hard
 * Theme Selection
     * Add a dropdown menu for theme selection. Originally I wanted Among Us to be a them selection instead of the main layout. I'd like the player to be able to choose a style or theme they like best with maybe three options.
+        * Basic Mode (regular Minesweeper)
+        * Among Us
+        * Another undecided theme
 * Timer
-    * I'd like to add a timer to add a time limit to play for each player
+    * I'd like to add a timer to add a time limit to play for the player
 * Question Mark Feature
     * I'd like to add a third clicking feature where they can mark imposters (bombs) that they are unsure about. These would not have to be unmarked in order to win the game if they are incorrect guesses.
