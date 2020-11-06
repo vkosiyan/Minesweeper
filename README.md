@@ -9,19 +9,14 @@
 * [Next Steps](#next-steps)
 
 
-
 # About The Project
-Minesweeper is a single-player game where the objective is to clear and mark all hidden "mines" or "bombs" without detonating them. The player does this by using clues from neighboring tiles that display how many bombs are touching it. The player right clicks the tiles they believe are bombs to mark them with flags, and if all bombs are marked correctly,the player wins. If a player clicks one bomb, all bombs will activate and the game is over.
-
+Minesweeper is a single-player game where the objective is to clear and mark all hidden "mines" or "bombs" without detonating them. The player does this by using clues from neighboring tiles that display how many bombs are touching it. The player right clicks the tiles they believe are bombs to mark them with flags, and if all bombs are marked correctly, the player wins. If a player clicks one bomb, all bombs will activate and the game is over.
 
 ![Loaded Game](images/readme/loadedgame.png)
 
-
 For this version, there's a fun twist where all the bombs are "imposters" from the game Among Us. If you activate one imposter, all will appear.
 
-
 ![Game Over](images/readme/imposters.png)
-
 
 Using the help of numbers of neighboring tiles, you go through and mark each suspected imposter tile with a "SUS" instead of a flag. If the player marks all the imposters correctly without triggering them, then the player wins! 
 
@@ -43,12 +38,12 @@ There are also some fun themed animations and sounds that are triggered when the
 
 # Getting Started
 
-[Click to play the game](https://vkosiyan.github.io/Minesweeper)
+[Click to play the game](https://vkosiyan.github.io/Minesweeper){:target="_blank"}
 
 ## Controls
 * `Left-click` - reveals a block
 * `Right-click` - places a SUS to mark your suspected imposter
-* `Right-click` - right-clicking an already marked flag will remove it
+* `Right-click` - right-clicking an already marked SUS will remove it
 
 
 ## How to Play
@@ -61,7 +56,6 @@ There are also some fun themed animations and sounds that are triggered when the
     * If you have marked any non-imposter squares with a "SUS", you must unmark them in order to win the game. You can use the "Suspicions Used" counter in the right Task Bar to help keep track of your markings.
 
 * Click the "Start New Game" button to load a new game and board
-
 
 # Next Steps
 

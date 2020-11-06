@@ -3,12 +3,12 @@ const width = 10; // this will be the width and height of the board
 const tileNum = width * width; 
 const bombName = 'bomb'; // class name for a bomb
 const blankName = 'safe' // class name for a blank square
-const bombText = '💣'; // what the innerText of a bomb square will say
+const bombText = ''; // what the innerText of a bomb square will say
 const flagText = 'SUS' // used for when right clicked
-let blankTile = ''; // what the innerText of a blank square will say
+const blankTile = ''; // what the innerText of a blank square will say
 const boardArray = []; //we are creating an array that has both bombs and safe in the array
 const numOfBombs = 10; // number of bombs in the game
-const numOfBlanks = tileNum - numOfBombs; //number of blank squares in the game. We are subtracting one because the first in the shuffled array will be safe for the first click
+const numOfBlanks = tileNum - numOfBombs - 1; //number of blank squares in the game. We are subtracting one because the first in the shuffled array will be safe for the first click
 
 
 // State variables ===============================================
@@ -23,15 +23,20 @@ const boardTiles = [];
 // cached element references ========================================
 
 const grid = document.querySelector('.grid');
+
 const newGame = document.querySelector('button');
+
 let character = document.querySelector("img"); //character decoration image on page
+let flagCounter = document.querySelector('#counter');
+
 let newGameGif = document.querySelector(".newGame");
 let loseGif = document.querySelector(".loseGif");
 let winGif = document.querySelector(".winGif");
+
 let newGameAudio = document.querySelector("#newgameaudio");
 let victoryAudio = document.querySelector("#victoryaudio");
 let defeatAudio = document.querySelector("#defeataudio");
-let flagCounter = document.querySelector('#counter');
+
 // Creating the grid for the game ==================================
 
 
