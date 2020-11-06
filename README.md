@@ -27,7 +27,6 @@ There are also some fun themed animations and sounds that are triggered when the
 ![Game Over Lose](images/readme/gameover.png)
 ![Game Over Victory](images/readme/victory.png)
 ![Start New Game Button](images/readme/newgame.png)
-<!-- TABLE OF CONTENTS -->
 
 # Technologies Used
 
@@ -38,7 +37,7 @@ There are also some fun themed animations and sounds that are triggered when the
 
 # Getting Started
 
-[Click to play the game](https://vkosiyan.github.io/Minesweeper){:target="_blank"}
+[Click to play the game](https://vkosiyan.github.io/Minesweeper)
 
 ## Controls
 * `Left-click` - reveals a block

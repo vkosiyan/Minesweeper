@@ -1,4 +1,5 @@
 /*----- constants -----*/
+
 const width = 10; // this will be the width and height of the board
 const tileNum = width * width; 
 const bombName = 'bomb'; // class name for a bomb
@@ -12,6 +13,7 @@ const numOfBlanks = tileNum - numOfBombs - 1; //number of blank squares in the g
 
 
 // State variables ===============================================
+
 let boardDivs = [];
 let isGameOver = false;
 let firstTileIsClicked = false;
@@ -38,7 +40,6 @@ let victoryAudio = document.querySelector("#victoryaudio");
 let defeatAudio = document.querySelector("#defeataudio");
 
 // Creating the grid for the game ==================================
-
 
 function createBoard() {
     for(i = 0; i < tileNum; i++) { //we will create as many tiles depending on the width of the board and multiply so that the board is a square
