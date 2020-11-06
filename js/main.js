@@ -23,6 +23,7 @@ const boardTiles = [];
 // cached element references ========================================
 const grid = document.querySelector('.grid');
 const newGame = document.querySelector('button');
+let character = document.querySelector("img") //character decoration image on page
 // Creating the grid for the game ==================================
 
 
@@ -222,11 +223,13 @@ function restartGame(){ //button to restart the board for a new game
     boardTiles.length = 0;
     shuffle();
     }
-    console.log(boardTiles)  
 }
 
 
-function myFunction() {
-    var popup = document.getElementById("myPopup");
+
+character.addEventListener("click", speechPopUp);
+function speechPopUp(){
+    let popup = document.getElementById("speechBubble");
     popup.classList.toggle("show");
   }
+
