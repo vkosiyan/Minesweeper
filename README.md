@@ -76,3 +76,5 @@ There are also some fun themed animations and sounds that are triggered when the
     * I'd like to add a timer to add a time limit to play for the player
 * Question Mark Feature
     * I'd like to add a third clicking feature where they can mark imposters (bombs) that they are unsure about. These would not have to be unmarked in order to win the game if they are incorrect guesses.
+* Responsiveness
+    * Make the window more responsive for resizing, such as making the squares smaller or removing the character if the window is smaller.
